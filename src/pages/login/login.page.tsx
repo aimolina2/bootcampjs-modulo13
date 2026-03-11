@@ -1,20 +1,29 @@
 import React from "react";
+import { Credentials } from "./login.vm";
+import { LoginFormComponent } from "./components";
+import { useNavigate } from "react-router-dom";
+import { mapCredentialsFromVmToApi } from "./login.mapper";
+import { isValidLogin } from "./api";
+import { appRoutes } from "@/core/router";
 
 export const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (credentials: Credentials) => {
+    const apiCredentials = mapCredentialsFromVmToApi(credentials);
+    isValidLogin(apiCredentials).then((isValid) => {
+      if (isValid) {
+        navigate(appRoutes.accountList);
+      } else {
+        alert("Usuario o clave no correctas. Ppsst: admin@email.com / test");
+      }
+    });
+  };
+
   return (
     <div>
       <h1>Acceso</h1>
-      <form>
-        <div>
-          <label htmlFor="username">Usuario</label>
-          <input type="text" id="username"></input>
-        </div>
-        <div>
-          <label htmlFor="password">Contraseña</label>
-          <input type="passwprd" id="password"></input>
-        </div>
-        <button type="submit">Acceder</button>
-      </form>
+      <LoginFormComponent onLogin={handleSubmit} />
     </div>
   );
 };
