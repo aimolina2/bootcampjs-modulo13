@@ -1,5 +1,11 @@
 import React from "react";
-import { createEmptyCredentials, Credentials } from "../login.vm";
+import {
+  createEmptyCredentials,
+  createEmptyCredentialsFormErrors,
+  Credentials,
+} from "../login.vm";
+import { validateForm } from "../login.validation";
+import classes from "./login-form.component.module.css";
 
 interface Props {
   onLogin: (credentials: Credentials) => void;
@@ -11,6 +17,10 @@ export const LoginFormComponent: React.FC<Props> = (props) => {
     createEmptyCredentials(),
   );
 
+  const [errors, setErrors] = React.useState<Credentials>(
+    createEmptyCredentialsFormErrors(),
+  );
+
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
@@ -20,30 +30,41 @@ export const LoginFormComponent: React.FC<Props> = (props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onLogin(credentials);
+    const validationResult = validateForm(credentials);
+    setErrors(validationResult.errors);
+
+    if (validationResult.succeeded) {
+      onLogin(credentials);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={classes.form}>
       <div>
-        <label htmlFor="username">Usuario</label>
         <input
           type="text"
           id="username"
           name="user"
           onChange={handleFieldChange}
+          placeholder="Usuario"
+          className={errors.user ? classes.inputError : ""}
         ></input>
+        {errors.user && <p className={classes.error}>{errors.user}</p>}
       </div>
       <div>
-        <label htmlFor="password">Contraseña</label>
         <input
           type="passwprd"
           id="password"
           name="password"
           onChange={handleFieldChange}
+          placeholder="Clave"
+          className={errors.password ? classes.inputError : ""}
         ></input>
+        {errors.password && <p className={classes.error}>{errors.password}</p>}
       </div>
-      <button type="submit">Acceder</button>
+      <button type="submit" className={classes.btnEnviar}>
+        Acceder
+      </button>
     </form>
   );
 };

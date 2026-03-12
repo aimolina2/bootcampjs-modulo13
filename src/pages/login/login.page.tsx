@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { mapCredentialsFromVmToApi } from "./login.mapper";
 import { isValidLogin } from "./api";
 import { appRoutes } from "@/core/router";
+import classes from "./login.page.module.css";
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,9 +22,18 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Acceso</h1>
-      <LoginFormComponent onLogin={handleSubmit} />
-    </div>
+    <>
+      <header className={classes.header}>
+        <img src="assets/logo_header.svg" alt="" className={classes.logo} />
+      </header>
+      <div className={classes.bgImg}></div>
+      <div className={classes.box}>
+        <h1>Acceso</h1>
+        <LoginFormComponent onLogin={handleSubmit} />
+        <h4 className={classes.inputFooter}>
+          Está usted en un <strong>sitio seguro</strong>
+        </h4>
+      </div>
+    </>
   );
 };
