@@ -6,14 +6,17 @@ import { mapCredentialsFromVmToApi } from "./login.mapper";
 import { isValidLogin } from "./api";
 import { appRoutes } from "@/core/router";
 import classes from "./login.page.module.css";
+import { useProfileContext } from "@/core/profile";
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const { setUserProfile } = useProfileContext();
 
   const handleSubmit = (credentials: Credentials) => {
     const apiCredentials = mapCredentialsFromVmToApi(credentials);
     isValidLogin(apiCredentials).then((isValid) => {
       if (isValid) {
+        setUserProfile(credentials.user);
         navigate(appRoutes.accountList);
       } else {
         alert("Usuario o clave no correctas. Ppsst: admin@email.com / test");
