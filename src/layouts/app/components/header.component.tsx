@@ -10,7 +10,7 @@ export const HeaderComponent: React.FC = () => {
       <div>
         <img src={logoHeader} alt="" className={classes.headerLogo} />
         <div className={classes.usuario}>
-          <p>{userName}</p>
+          <p>Bienvenido {userName}</p>
         </div>
       </div>
     </header>

@@ -53,7 +53,7 @@ export const LoginFormComponent: React.FC<Props> = (props) => {
       </div>
       <div>
         <input
-          type="passwprd"
+          type="password"
           id="password"
           name="password"
           onChange={handleFieldChange}

@@ -11,6 +11,10 @@
   --element-border-color: #e5e5e5;
   --element-radius: 10px;
   --error_color: #f44336;
+  --table-header-color: var(--secondary_color);
+  --table-header-background-color: #ccc;
+  --table-header-font-size: 16px;
+  --table-header-font-weight: 900;
 }
 
 * {
