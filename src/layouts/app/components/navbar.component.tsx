@@ -1,6 +1,6 @@
-import { appRoutes, routesPrefixes } from "@/core/router";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { appRoutes, routesPrefixes } from "@/core/router";
 import classes from "./navbar.component.module.css";
 
 export const NavBarComponent: React.FC = () => {
