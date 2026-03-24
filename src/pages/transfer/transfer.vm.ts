@@ -27,3 +27,37 @@ export const createEmptyTransferVm = (): TransferVm => ({
   realDateTransfer: undefined,
   email: "",
 });
+
+export interface TransferError {
+  accountId: string;
+  iban: string;
+  name: string;
+  amount: string;
+  concept: string;
+  notes: string;
+  dateTranfer: string;
+  realDateTransfer: string;
+  email: string;
+}
+
+export const createEmptyTransferError = (): TransferError => ({
+  accountId: "",
+  iban: "",
+  name: "",
+  amount: "",
+  concept: "",
+  notes: "",
+  dateTranfer: "",
+  realDateTransfer: "",
+  email: "",
+});
+
+export interface FieldValidationResult {
+  succeded: boolean;
+  errorMessage?: string;
+}
+
+export interface FormValidationResult {
+  succeded: boolean;
+  errors: TransferError;
+}
