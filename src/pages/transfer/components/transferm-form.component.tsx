@@ -1,5 +1,12 @@
 import React from "react";
-import { AccountVm, createEmptyTransferVm, TransferVm } from "../transfer.vm";
+import {
+  AccountVm,
+  createEmptyTransferError,
+  createEmptyTransferVm,
+  TransferError,
+  TransferVm,
+} from "../transfer.vm";
+import { validateForm } from "../validations";
 
 interface Props {
   accountList: AccountVm[];
@@ -12,9 +19,17 @@ export const TransferFormComponent: React.FC<Props> = (props) => {
     createEmptyTransferVm(),
   );
 
+  const [errors, setErrors] = React.useState<TransferError>(
+    createEmptyTransferError(),
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onTransfer(transfer);
+    const formValidationResult = validateForm(transfer);
+    setErrors(formValidationResult.errors);
+    if (formValidationResult.succeeded) {
+      onTransfer(transfer);
+    }
   };
 
   const handleFieldChange = (
@@ -43,27 +58,33 @@ export const TransferFormComponent: React.FC<Props> = (props) => {
             ))}
             <option value="">Seleccione una cuenta</option>
           </select>
+          <p>{errors.accountId}</p>
         </div>
 
         <div>
           <label>Ingrese el IBAN de destino:</label>
           <input type="text" name="iban" onChange={handleFieldChange} />
+          <p>{errors.iban}</p>
         </div>
         <div>
           <label>Beneficiario:</label>
           <input type="text" name="name" onChange={handleFieldChange} />
+          <p>{errors.name}</p>
         </div>
         <div>
           <label>Importe:</label>
           <input type="number" name="amount" onChange={handleFieldChange} />
+          <p>{errors.amount}</p>
         </div>
         <div>
           <label>Concepto:</label>
           <input name="concept" onChange={handleFieldChange} />
+          <p>{errors.concept}</p>
         </div>
         <div>
           <label>Observaciones:</label>
           <input name="notes" onChange={handleFieldChange} />
+          <p>{errors.notes}</p>
         </div>
         <div>
           <p>
@@ -77,6 +98,7 @@ export const TransferFormComponent: React.FC<Props> = (props) => {
               name="realDateTransfer"
               onChange={handleFieldChange}
             />
+            <p>{errors.realDateTransfer}</p>
           </div>
         </div>
         <div>
@@ -84,6 +106,7 @@ export const TransferFormComponent: React.FC<Props> = (props) => {
           <div>
             <label>Email del beneficiario:</label>
             <input name="email" onChange={handleFieldChange} />
+            <p>{errors.email}</p>
           </div>
         </div>
         <button type="submit">REALIZAR LA TRANSFERENCIA</button>
