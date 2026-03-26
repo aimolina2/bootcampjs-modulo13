@@ -10,3 +10,6 @@ export const isEmailWellFormed = (email: string): boolean =>
   validator.isEmail(email);
 
 export const isStringValueInformed = (field: string): boolean => field !== "";
+
+export const isValueNotNullOrUndefined = <T>(value: T): boolean =>
+  value !== null && value !== undefined;

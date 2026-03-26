@@ -4,9 +4,45 @@ import {
   isDateAfterToday,
   isEmailWellFormed,
   isStringValueInformed,
+  isValueNotNullOrUndefined,
 } from "./plain.validation";
 
 describe("plain.validation", () => {
+  describe("isValueNotNullOrUndefined specs", () => {
+    it("should return true when value is not null or undefined", () => {
+      // Arrange
+      const value = "test";
+
+      // Act
+      const result = isValueNotNullOrUndefined(value);
+
+      // Assert
+      expect(result).toBeTruthy();
+    });
+
+    it("should return false when value is null", () => {
+      // Arrange
+      const value = null;
+
+      // Act
+      const result = isValueNotNullOrUndefined(value);
+
+      // Assert
+      expect(result).toBeFalsy();
+    });
+
+    it("should return false when value is undefined", () => {
+      // Arrange
+      const value = undefined;
+
+      // Act
+      const result = isValueNotNullOrUndefined(value);
+
+      // Assert
+      expect(result).toBeFalsy();
+    });
+  });
+
   describe("isStringValueInformed specs", () => {
     it("should return true when string value is informed", () => {
       // Arrange
