@@ -2,6 +2,7 @@ import React from "react";
 import { AppLayout } from "@/layouts";
 import { AccountVm, TransferVm } from "./transfer.vm";
 import { TransferFormComponent } from "./components/transfer-form.component";
+import classes from "./transfer.page.module.css";
 
 const accountListMock: AccountVm[] = [
   {
@@ -34,11 +35,13 @@ export const TransferPage: React.FC = () => {
 
   return (
     <AppLayout>
-      <div>Transfer</div>
-      <TransferFormComponent
-        accountList={accountList}
-        onTransfer={handleTranfer}
-      />
+      <div className={classes.container}>
+        <h1 className={classes.title}>Transferencias nacionales</h1>
+        <TransferFormComponent
+          accountList={accountList}
+          onTransfer={handleTranfer}
+        />
+      </div>
     </AppLayout>
   );
 };
