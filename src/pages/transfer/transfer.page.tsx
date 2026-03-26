@@ -1,7 +1,7 @@
 import React from "react";
 import { AppLayout } from "@/layouts";
 import { AccountVm, TransferVm } from "./transfer.vm";
-import { TransferFormComponent } from "./components/transferm-form.component";
+import { TransferFormComponent } from "./components/transfer-form.component";
 
 const accountListMock: AccountVm[] = [
   {
