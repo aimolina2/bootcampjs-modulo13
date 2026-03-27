@@ -5,10 +5,12 @@ import {
   isValueNotNullOrUndefined,
   isDateAfterToday,
   isEmailWellFormed,
+  buildValidationFailedResult,
+  buildValidationSuccededResult,
+  buildRequiredFieldValidationFailedResponse,
 } from "@/common/validations";
 
 import {
-  REQUIRED_FIELD_MESSAGE,
   INVALID_IBAN_MESSAGE,
   INVALID_AMOUNT_MESSAGE,
   INVALID_REAL_DATE_TRANSFER_MESSAGE,
@@ -16,20 +18,9 @@ import {
 } from "@/common/validations/validation.const";
 import { FieldValidationResult } from "@/common/validations/validation.model";
 
-const buildValidationFailedResult = (
-  errorMessage: string,
-): FieldValidationResult => ({
-  succeeded: false,
-  errorMessage,
-});
-
-const buildValidationSuccededResult = (): FieldValidationResult => ({
-  succeeded: true,
-});
-
 export const validateIbanField = (value: string): FieldValidationResult => {
   if (!isStringValueInformed(value)) {
-    return buildValidationFailedResult(REQUIRED_FIELD_MESSAGE);
+    return buildRequiredFieldValidationFailedResponse();
   }
 
   if (!isValidIban(value)) {
@@ -43,7 +34,7 @@ export const validateAccountIdField = (
   value: string,
 ): FieldValidationResult => {
   if (!isStringValueInformed(value)) {
-    return buildValidationFailedResult(REQUIRED_FIELD_MESSAGE);
+    return buildRequiredFieldValidationFailedResponse();
   }
 
   return buildValidationSuccededResult();
@@ -51,7 +42,7 @@ export const validateAccountIdField = (
 
 export const validateNameField = (value: string): FieldValidationResult => {
   if (!isStringValueInformed(value)) {
-    return buildValidationFailedResult(REQUIRED_FIELD_MESSAGE);
+    return buildRequiredFieldValidationFailedResponse();
   }
 
   return buildValidationSuccededResult();
@@ -67,7 +58,7 @@ export const validateAmountField = (value: number): FieldValidationResult => {
 
 export const validateConceptField = (value: string): FieldValidationResult => {
   if (!isStringValueInformed(value)) {
-    return buildValidationFailedResult(REQUIRED_FIELD_MESSAGE);
+    return buildRequiredFieldValidationFailedResponse();
   }
 
   return buildValidationSuccededResult();
