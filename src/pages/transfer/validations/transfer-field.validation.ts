@@ -6,14 +6,15 @@ import {
   isDateAfterToday,
   isEmailWellFormed,
 } from "@/common/validations";
-import { FieldValidationResult } from "../transfer.vm";
 
-export const REQUIRED_FIELD_MESSAGE = "Debe informar el campo";
-export const INVALID_IBAN_MESSAGE = "Debe informar un IBAN válido";
-export const INVALID_AMOUNT_MESSAGE = "El importe debe ser mayor que 0";
-export const INVALID_REAL_DATE_TRANSFER_MESSAGE =
-  "La fecha de ejecución debe ser posterior a hoy";
-export const INVALID_EMAIL_MESSAGE = "El email no está bien formado";
+import {
+  REQUIRED_FIELD_MESSAGE,
+  INVALID_IBAN_MESSAGE,
+  INVALID_AMOUNT_MESSAGE,
+  INVALID_REAL_DATE_TRANSFER_MESSAGE,
+  INVALID_EMAIL_MESSAGE,
+} from "@/common/validations/validation.const";
+import { FieldValidationResult } from "@/common/validations/validation.model";
 
 const buildValidationFailedResult = (
   errorMessage: string,

@@ -108,5 +108,17 @@
       "accountId": "3"
     }
   ],
-  "transfer": []
+  "transfer": [
+    {
+      "accountId": "2",
+      "iban": "ES9121000418450200051332",
+      "name": "Paco",
+      "amount": "200",
+      "concept": "Compra mes marzo",
+      "notes": "",
+      "transferDate": "Fri Mar 27 2026",
+      "realTransferDate": "",
+      "id": 1
+    }
+  ]
 }
