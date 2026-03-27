@@ -1,3 +1,4 @@
+import { REQUIRED_FIELD_MESSAGE } from "@/common/validations/validation.const";
 import { validateForm } from "./login.validation";
 import { Credentials } from "./login.vm";
 
@@ -30,7 +31,7 @@ describe("pages/login/longin.validation", () => {
 
     // Assert
     expect(result.succeeded).toBeFalsy();
-    expect(result.errors.user).toEqual("Debe informar del campo usuario");
+    expect(result.errors.user).toEqual(REQUIRED_FIELD_MESSAGE);
     expect(result.errors.password).toEqual("");
   });
 
@@ -47,9 +48,7 @@ describe("pages/login/longin.validation", () => {
     // Assert
     expect(result.succeeded).toBeFalsy();
     expect(result.errors.user).toEqual("");
-    expect(result.errors.password).toEqual(
-      "Debe informar del campo contraseña",
-    );
+    expect(result.errors.password).toEqual(REQUIRED_FIELD_MESSAGE);
   });
 
   it("Should return validation failed when both fields are empty", () => {
@@ -64,9 +63,7 @@ describe("pages/login/longin.validation", () => {
 
     // Assert
     expect(result.succeeded).toBeFalsy();
-    expect(result.errors.user).toEqual("Debe informar del campo usuario");
-    expect(result.errors.password).toEqual(
-      "Debe informar del campo contraseña",
-    );
+    expect(result.errors.user).toEqual(REQUIRED_FIELD_MESSAGE);
+    expect(result.errors.password).toEqual(REQUIRED_FIELD_MESSAGE);
   });
 });
